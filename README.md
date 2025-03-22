@@ -1,4 +1,4 @@
-# 🏆 Reward Points Calculation API
+# Reward Points Calculation API
 
 This is a **Spring Boot-based Web API** that calculates reward points for customers based on their monthly spending. The API computes reward points using the following rules:
 
@@ -7,7 +7,7 @@ This is a **Spring Boot-based Web API** that calculates reward points for custom
 
 ---
 
-## 🚀 **Tech Stack**
+## **Tech Stack**
 - **Java** 
 - **Spring Boot**
 - **Spring Data JPA**
@@ -25,14 +25,14 @@ This is a **Spring Boot-based Web API** that calculates reward points for custom
 
 ---
 
-## 🏆 **Reward Points Calculation Example**
+## **Reward Points Calculation Example**
 ### Formula:
 - Spend `$120` → `2 x $20` (for amount over $100) + `1 x $50` (for amount between $50 and $100)  
 ➡️ **= 90 points**
 
 ---
 
-## 🔥 **API Endpoints**
+## **API Endpoints**
 ### 1. **Get Reward Points by Customer**
 `GET /customers/{customerId}`  
 
@@ -56,7 +56,7 @@ GET http://localhost:8090/customers/CUST1
 
 ---
 
-## 🏗️ **Project Structure**
+## **Project Structure**
 ```
 src
 ├── main
@@ -79,10 +79,10 @@ src
 
 ---
 
-## ✅ **Testing**
+## **Testing**
 
 
-### ✅ **Sample Output (Success)**
+### **Sample Output (Success)**
 ```json
 {
   "customerId": "CUST1",
