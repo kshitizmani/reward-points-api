@@ -12,6 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * Service class responsible for calculating reward points based on customer transactions.
+ */
+
 @Service
 public class RewardService {
 	
@@ -21,6 +26,21 @@ public class RewardService {
         this.transactionRepository = transactionRepository;
     }
 
+    
+    /**
+     * Computes the reward points for each month and the total points for a given customer.
+     * 
+     * <p>The calculation is based on transactions made within the last 3 months.
+     * Reward points are calculated as follows:
+     * <ul>
+     *   <li>1 point for every dollar spent over $50.</li>
+     *   <li>2 points for every dollar spent over $100.</li>
+     * </ul>
+     *
+     * @param customerId the ID of the customer.
+     * @return a {@code RewardResponseDto} containing monthly and total reward points.
+     */
+    
     public RewardResponseDto calculateRewardPoints(String customerId) {
         LocalDate now = LocalDate.now();
         LocalDate threeMonthsAgo = now.minusMonths(3);
@@ -41,7 +61,20 @@ public class RewardService {
 
         return new RewardResponseDto(customerId, monthlyPoints, totalPoints);
     }
-
+    
+    /**
+     * Calculates the reward points based on the transaction amount.
+     * 
+     * <p>Calculation rules:
+     * <ul>
+     *   <li>1 point for every dollar spent over $50.</li>
+     *   <li>2 points for every dollar spent over $100.</li>
+     * </ul>
+     *
+     * @param amount the transaction amount.
+     * @return the calculated reward points.
+     */
+    
     private int calculatePoints(double amount) {
         int points = 0;
         if (amount > 100) {

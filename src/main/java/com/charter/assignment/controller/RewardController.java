@@ -8,8 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.charter.assignment.dto.RewardResponseDto;
 import com.charter.assignment.service.RewardService;
 
+
+/**
+ * REST controller for handling reward points calculation for customers.
+ * Provides an endpoint to retrieve the reward points earned by a customer
+ * for each month and the total points.
+ */
+
 @RestController
-@RequestMapping("/api/rewards")
+@RequestMapping("/customers")
 public class RewardController {
 	
 	private final RewardService rewardService;
@@ -17,7 +24,14 @@ public class RewardController {
     public RewardController(RewardService rewardService) {
         this.rewardService = rewardService;
     }
-    //GET method to retrieve the reward points earned by a customer for each month and the total points.
+    
+    
+    /**
+     * Retrieves the reward points earned by a customer for each month and the total points.
+     *
+     * @param customerId the ID of the customer.
+     * @return a {@code RewardResponseDto} containing the reward points details.
+     */ 
     
     @GetMapping("/{customerId}")
     public RewardResponseDto getRewardPoints(@PathVariable String customerId) {

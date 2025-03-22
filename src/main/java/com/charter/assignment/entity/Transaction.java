@@ -7,7 +7,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-
+/**
+ * Entity class representing a transaction made by a customer.
+ * Stores information about the transaction amount, date, and associated customer.
+ */
 
 @Entity
 public class Transaction {
@@ -20,7 +23,14 @@ public class Transaction {
 	    private double amount;
 	    private LocalDate date;
 	    
-	    
+	    /**
+	     * Constructs a new {@code Transaction} with the specified details.
+	     *
+	     * @param id the unique ID of the transaction.
+	     * @param customerId the ID of the customer who made the transaction.
+	     * @param amount the amount of the transaction.
+	     * @param date the date when the transaction occurred.
+	     */
 		public Transaction(Long id, String customerId, double amount, LocalDate date) {
 			super();
 			this.id = id;
@@ -29,12 +39,20 @@ public class Transaction {
 			this.date = date;
 		}
 		
+		 /**
+	     * Default constructor.
+	     */
 		
 		public Transaction() {
 			super();
 
 		}
-
+		
+	
+		/**
+	     * getter and setter methods
+	     *
+	     */	
 
 		public Long getId() {
 			return id;
