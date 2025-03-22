@@ -21,81 +21,84 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
 /**
- * Integration test class for {@link RewardController}.
- * Tests the endpoints to ensure they function correctly with the {@link RewardService}.
+ * Integration test class for {@link RewardController}. Tests the endpoints to
+ * ensure they function correctly with the {@link RewardService}.
  */
 
 @ExtendWith(MockitoExtension.class)
 public class IntegrationTestCase {
 
-	 private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
-	    @Mock
-	    private RewardService rewardService;
+	@Mock
+	private RewardService rewardService;
 
-	    @InjectMocks
-	    private RewardController rewardController;
+	@InjectMocks
+	private RewardController rewardController;
 
-	    private RewardResponseDto mockResponse;
-	    
-	    /**
-	     * Sets up the test environment before each test.
-	     * Initializes {@code MockMvc} and prepares sample mock data.
-	     */
+	private RewardResponseDto mockResponse;
 
-	    @BeforeEach
-	    void setUp() {
-	        // Initialize MockMvc with the RewardController
-	        mockMvc = MockMvcBuilders.standaloneSetup(rewardController).build();
+	/**
+	 * Sets up the test environment before each test. Initializes {@code MockMvc}
+	 * and prepares sample mock data.
+	 */
 
-	        // Sample mock data
-	        Map<String, Integer> pointsPerMonth = new HashMap<>();
-	        pointsPerMonth.put("2025-01", 90);
-	        pointsPerMonth.put("2025-02", 25);
+	@BeforeEach
+	void setUp() {
+		// Initialize MockMvc with the RewardController
+		mockMvc = MockMvcBuilders.standaloneSetup(rewardController).build();
 
-	        mockResponse = new RewardResponseDto("CUST1", pointsPerMonth, 115);
-	    }
+		// Sample mock data
+		Map<String, Integer> pointsPerMonth = new HashMap<>();
+		pointsPerMonth.put("2025-01", 90);
+		pointsPerMonth.put("2025-02", 25);
 
-	    /**
-	     * Tests the {@code getRewardPoints} endpoint for a successful response.
-	     * 
-	     * <p>Verifies that the response contains the correct reward points details.</p>
-	     *
-	     */
-	    
-	    @Test
-	    void testGetRewardPoints_Success() throws Exception {
-	        // Arrange
-	        when(rewardService.calculateRewardPoints("CUST1")).thenReturn(mockResponse);
+		mockResponse = new RewardResponseDto("CUST1", pointsPerMonth, 115);
+	}
 
-	        // Act & Assert
-	        mockMvc.perform(get("/customers/CUST1")
-	                        .contentType(MediaType.APPLICATION_JSON))
-	                .andExpect(status().isOk())
-	                .andExpect(jsonPath("$.customerId").value("CUST1"))
-	                .andExpect(jsonPath("$.pointsPerMonth['2025-01']").value(90))
-	                .andExpect(jsonPath("$.pointsPerMonth['2025-02']").value(25))
-	                .andExpect(jsonPath("$.totalPoints").value(115));
-	    }
-	    
-	    /**
-	     * Tests the {@code getRewardPoints} endpoint when the customer is not found.
-	     * 
-	     * <p>Verifies that the response is empty when the customer does not exist.</p>
-	     */
+	/**
+	 * Tests the {@code getRewardPoints} endpoint for a successful response.
+	 * 
+	 * <p>
+	 * Verifies that the response contains the correct reward points details.
+	 * </p>
+	 *
+	 */
 
-	    @Test
-	    void testGetRewardPoints_CustomerNotFound() throws Exception {
-	        // Arrange
-	        when(rewardService.calculateRewardPoints("CUST2")).thenReturn(null);
+	@Test
+	void testGetRewardPoints_Success() throws Exception {
+		// Arrange
+		when(rewardService.calculateRewardPoints("CUST1")).thenReturn(mockResponse);
 
-	        // Act & Assert
-	        mockMvc.perform(get("/customers/CUST2")
-	                        .contentType(MediaType.APPLICATION_JSON))
-	                .andExpect(status().isOk()) // Status OK but empty response
-	                .andExpect(content().string(""));
-	    }
+		// Act & Assert
+		mockMvc.perform(get("/customers/CUST1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.customerId").value("CUST1"))
+				.andExpect(jsonPath("$.pointsPerMonth['2025-01']").value(90))
+				.andExpect(jsonPath("$.pointsPerMonth['2025-02']").value(25))
+				.andExpect(jsonPath("$.totalPoints").value(115));
+	}
+
+	/**
+	 * Tests the {@code getRewardPoints} endpoint when the customer is not found.
+	 * 
+	 * <p>
+	 * Verifies that the response is empty when the customer does not exist.
+	 * </p>
+	 */
+
+	@Test
+	void testGetRewardPoints_CustomerNotFound() throws Exception {
+		// Arrange
+		when(rewardService.calculateRewardPoints("CUST2")).thenReturn(null);
+
+		// Act & Assert
+		mockMvc.perform(get("/customers/CUST2").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()) // Status
+																													// OK
+																													// but
+																													// empty
+																													// response
+				.andExpect(content().string(""));
+	}
 
 }
