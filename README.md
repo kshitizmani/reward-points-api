@@ -28,7 +28,7 @@ This is a **Spring Boot-based Web API** that calculates reward points for custom
 ## **Reward Points Calculation Example**
 ### Formula:
 - Spend `$120` → `2 x $20` (for amount over $100) + `1 x $50` (for amount between $50 and $100)  
-➡️ **= 90 points**
+**= 90 points**
 
 ---
 
@@ -36,12 +36,12 @@ This is a **Spring Boot-based Web API** that calculates reward points for custom
 ### 1. **Get Reward Points by Customer**
 `GET /customers/{customerId}`  
 
-📌 **Example Request**:
+**Example Request**:
 ```http
 GET http://localhost:8090/customers/CUST1
 ```
 
-📌 **Example Response**:
+**Example Response**:
 ```json
 {
   "customerId": "CUST1",
