@@ -7,7 +7,7 @@ import java.util.Map;
  * customer. Contains the reward points earned by a customer for each month and
  * the total points.
  */
-public class RewardResponseDto {
+public class RewardResponse {
 
 	private String customerId;
 	private Map<String, Integer> pointsPerMonth;
@@ -21,7 +21,7 @@ public class RewardResponseDto {
 	 *                       month.
 	 * @param totalPoints    the total reward points earned by the customer.
 	 */
-	public RewardResponseDto(String customerId, Map<String, Integer> pointsPerMonth, int totalPoints) {
+	public RewardResponse(String customerId, Map<String, Integer> pointsPerMonth, int totalPoints) {
 		this.customerId = customerId;
 		this.pointsPerMonth = pointsPerMonth;
 		this.totalPoints = totalPoints;
@@ -30,7 +30,7 @@ public class RewardResponseDto {
 	/**
 	 * Default constructor.
 	 */
-	public RewardResponseDto() {
+	public RewardResponse() {
 		super();
 	}
 

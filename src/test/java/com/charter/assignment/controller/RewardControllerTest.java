@@ -1,4 +1,13 @@
-package com.charter.assignment;
+package com.charter.assignment.controller;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,25 +19,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.charter.assignment.controller.RewardController;
-import com.charter.assignment.dto.RewardResponseDto;
+import com.charter.assignment.dto.RewardResponse;
 import com.charter.assignment.service.RewardService;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-/**
- * Integration test class for {@link RewardController}. Tests the endpoints to
- * ensure they function correctly with the {@link RewardService}.
- */
-
 @ExtendWith(MockitoExtension.class)
-public class IntegrationTestCase {
-
+public class RewardControllerTest {
+	
 	private MockMvc mockMvc;
 
 	@Mock
@@ -37,7 +33,7 @@ public class IntegrationTestCase {
 	@InjectMocks
 	private RewardController rewardController;
 
-	private RewardResponseDto mockResponse;
+	private RewardResponse mockResponse;
 
 	/**
 	 * Sets up the test environment before each test. Initializes {@code MockMvc}
@@ -54,7 +50,7 @@ public class IntegrationTestCase {
 		pointsPerMonth.put("2025-01", 90);
 		pointsPerMonth.put("2025-02", 25);
 
-		mockResponse = new RewardResponseDto("CUST1", pointsPerMonth, 115);
+		mockResponse = new RewardResponse("CUST1", pointsPerMonth, 115);
 	}
 
 	/**
@@ -100,5 +96,6 @@ public class IntegrationTestCase {
 																													// response
 				.andExpect(content().string(""));
 	}
+
 
 }

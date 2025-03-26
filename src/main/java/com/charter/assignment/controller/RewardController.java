@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.charter.assignment.dto.RewardResponseDto;
+import com.charter.assignment.dto.RewardResponse;
 import com.charter.assignment.service.RewardService;
 
 /**
@@ -33,7 +33,7 @@ public class RewardController {
 	 */
 
 	@GetMapping("/{customerId}")
-	public RewardResponseDto getRewardPoints(@PathVariable String customerId) {
+	public RewardResponse getRewardPoints(@PathVariable String customerId) {
 		return rewardService.calculateRewardPoints(customerId);
 	}
 

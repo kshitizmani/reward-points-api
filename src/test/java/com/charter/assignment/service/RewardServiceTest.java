@@ -16,7 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.charter.assignment.dto.RewardResponseDto;
+import com.charter.assignment.dto.RewardResponse;
 import com.charter.assignment.entity.Transaction;
 import com.charter.assignment.repository.TransactionRepository;
 
@@ -66,7 +66,7 @@ class RewardServiceTest {
 				.thenReturn(mockTransactions);
 
 		// Act
-		RewardResponseDto response = rewardService.calculateRewardPoints("CUST1");
+		RewardResponse response = rewardService.calculateRewardPoints("CUST1");
 
 		// Assert
 		assertEquals("CUST1", response.getCustomerId());
@@ -96,7 +96,7 @@ class RewardServiceTest {
 		when(transactionRepository.findByCustomerIdAndDateBetween("CUST1", threeMonthsAgo, now)).thenReturn(List.of());
 
 		// Act
-		RewardResponseDto response = rewardService.calculateRewardPoints("CUST1");
+		RewardResponse response = rewardService.calculateRewardPoints("CUST1");
 
 		// Assert
 		assertEquals("CUST1", response.getCustomerId());

@@ -2,7 +2,7 @@ package com.charter.assignment.service;
 
 import org.springframework.stereotype.Service;
 
-import com.charter.assignment.dto.RewardResponseDto;
+import com.charter.assignment.dto.RewardResponse;
 import com.charter.assignment.entity.Transaction;
 import com.charter.assignment.repository.TransactionRepository;
 
@@ -43,7 +43,7 @@ public class RewardService {
 	 *         points.
 	 */
 
-	public RewardResponseDto calculateRewardPoints(String customerId) {
+	public RewardResponse calculateRewardPoints(String customerId) {
 		LocalDate now = LocalDate.now();
 		LocalDate threeMonthsAgo = now.minusMonths(3);
 
@@ -61,7 +61,7 @@ public class RewardService {
 			monthlyPoints.put(month, monthlyPoints.getOrDefault(month, 0) + points);
 		}
 
-		return new RewardResponseDto(customerId, monthlyPoints, totalPoints);
+		return new RewardResponse(customerId, monthlyPoints, totalPoints);
 	}
 
 	/**
